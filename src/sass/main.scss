@@ -1,0 +1,19 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+.searched-city--item {
+  cursor: pointer;
+  padding: 5px;
+  border: 1px solid #2d2d2d;
+  border-bottom: 0;
+
+  &:last-child {
+    border-bottom: 1px solid #2d2d2d;
+  }
+  &:hover {
+    background: #2d2d2d;
+    color: white;
+  }
+}
