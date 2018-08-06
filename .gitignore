@@ -7,7 +7,7 @@
 /coverage
 
 # sec
-/src/actions/ApiKeys
+/src/actions/ApiKeys.js
 
 # production
 /build
