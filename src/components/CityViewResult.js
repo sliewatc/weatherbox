@@ -9,7 +9,7 @@ class CityViewResult extends Component {
   }
   renderMusic = () => {
     if (this.props.weather.dataIsSet) {
-      return (<CityViewMusic spotifyAccessToken={this.props.spotifyAccessToken} weather={this.props.weather}/>)
+      return (<CityViewMusic weather={this.props.weather}/>)
     }
   };
   render () {

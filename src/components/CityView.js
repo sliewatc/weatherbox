@@ -49,7 +49,7 @@ class CityView extends Component {
 
   render() {
     return (
-      <ViewResultWithLoad spotifyAccessToken={this.props.spotifyAccessToken} isSet={this.state.dataIsSet} weather={this.state}/>
+      <ViewResultWithLoad isSet={this.state.dataIsSet} weather={this.state}/>
     )
   };
 }
