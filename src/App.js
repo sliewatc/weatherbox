@@ -10,8 +10,35 @@ class App extends Component {
   constructor() {
     super();
     this.state = {
+      spotifyAccessToken: null,
     }
   }
+
+  getClientCredentialsToken = async () => {
+    const response = await fetch('/api/gat');
+    const body = await response.json();
+    if (response.status !== 200) throw Error(body.message);
+    return body;
+  };
+
+  componentDidMount() {
+    this.getClientCredentialsToken()
+      .then(res => {
+        this.setState({
+          spotifyAccessToken: res.access_token
+        })
+      })
+      .catch(error => console.log(error));
+  }
+
+  CityViewRoutedPropped = (props) => {
+    return (
+      <CityViewRouted
+        spotifyAccessToken={this.state.spotifyAccessToken}
+        {...props}
+      />
+    );
+  };
 
   render() {
     return (
@@ -21,7 +48,7 @@ class App extends Component {
             <Link to='/'>Home</Link>
             <hr/>
             <Route exact path="/" component={CityFinderRouted}/>
-            <Route exact path="/city/:gid" component={CityViewRouted}/>
+            <Route exact path="/city/:gid" render={this.CityViewRoutedPropped}/>
           </div>
         </Router>
       </div>

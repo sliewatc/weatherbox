@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import LoadHold from '../actions/LoadHold'
 import CityViewResult from './CityViewResult'
-import openWeatherMapAPPID from '../actions/ApiKeys'
+import { openWeatherMapAPPID } from '../actions/ApiKeys'
 
 const ViewResultWithLoad = LoadHold(CityViewResult);
 
@@ -49,7 +49,7 @@ class CityView extends Component {
 
   render() {
     return (
-      <ViewResultWithLoad isSet={this.state.dataIsSet} parentState={this.state}/>
+      <ViewResultWithLoad spotifyAccessToken={this.props.spotifyAccessToken} isSet={this.state.dataIsSet} weather={this.state}/>
     )
   };
 }

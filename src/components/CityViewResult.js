@@ -8,20 +8,20 @@ class CityViewResult extends Component {
     }
   }
   renderMusic = () => {
-    if (this.props.parentState.dataIsSet) {
-      return (<CityViewMusic weatherContext={this.props.parentState}/>)
+    if (this.props.weather.dataIsSet) {
+      return (<CityViewMusic spotifyAccessToken={this.props.spotifyAccessToken} weather={this.props.weather}/>)
     }
   };
   render () {
     return(
       <div>
         <h2>
-          {this.props.parentState.cityName} - {this.props.parentState.gid}
+          {this.props.weather.cityName}
         </h2>
         <p>
-          Weather: {this.props.parentState.cityCond} - {this.props.parentState.cityCondDescription} -
-          Wind: {this.props.parentState.cityWind}m/s -
-          Temperature: {this.props.parentState.cityTemp}°C
+          Weather: {this.props.weather.cityCond} - {this.props.weather.cityCondDescription} -
+          Wind: {this.props.weather.cityWind}m/s -
+          Temperature: {this.props.weather.cityTemp}°C
         </p>
         {this.renderMusic()}
       </div>
