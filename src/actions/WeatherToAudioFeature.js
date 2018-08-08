@@ -35,7 +35,7 @@ const FeatureWeather = (temp, cond, condDescription, wind) => {
       featureObject.target_valence = 0.3;
       featureObject.max_mode = 0;
       featureObject.max_energy = 0.5;
-      console.log('set CLEAR');
+      console.log('set RAIN');
       break;
     case ('Drizzle') :
       featureObject.target_valence = 0.4;
@@ -55,7 +55,7 @@ const FeatureWeather = (temp, cond, condDescription, wind) => {
       featureObject.target_energy = 0.5;
       console.log('set DEFAULT CONDITION');
   }
-
+/*
   // Switch on temperature affecting danceability
   switch (true) {
     case (temp < -30) :
@@ -89,7 +89,7 @@ const FeatureWeather = (temp, cond, condDescription, wind) => {
     default :
       featureObject.target_danceability = 0.8;
       console.log('set DEFAULT TEMP');
-  }
+  }*/
 
   // Switch on wind affecting energy
   switch (true) {
@@ -128,5 +128,49 @@ const FeatureWeather = (temp, cond, condDescription, wind) => {
   return featureObject;
 };
 
-export { FeatureWeather }
+const spotifyGenres = [
+  "acoustic",
+  "alternative",
+  "ambient",
+  "blues",
+  "chill",
+  "classical",
+  "club",
+  "country",
+  "dance",
+  "deep-house",
+  "disco",
+  "dubstep",
+  "edm",
+  "electronic",
+  "folk",
+  "french",
+  "funk",
+  "guitar",
+  "happy",
+  "hip-hop",
+  "house",
+  "indie",
+  "indie-pop",
+  "jazz",
+  "k-pop",
+  "latin",
+  "movies",
+  "party",
+  "piano",
+  "punk",
+  "r-n-b",
+  "rainy-day",
+  "road-trip",
+  "rock",
+  "romance",
+  "sad",
+  "soul",
+  "study",
+  "summer",
+  "trance",
+  "work-out",
+];
+
+export { FeatureWeather, spotifyGenres }
 

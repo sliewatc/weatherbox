@@ -10,7 +10,7 @@ function parseCityListing(listing) {
   let countryName = countryAndAlt[0];
   let altCityName = '';
   if (typeof countryAndAlt[1] !== 'undefined') {
-     altCityName = countryAndAlt[1].replace(')', '');
+    altCityName = countryAndAlt[1].replace(')', '');
   }
   let gid = listing._links['city:item'].href.replace(/\D/g,'');
 
@@ -26,6 +26,7 @@ class CityFinder extends Component {
       lastQuery: null,
       gid: null,
       redirect: false,
+      searchShownClass: '',
     }
   }
 
@@ -44,14 +45,15 @@ class CityFinder extends Component {
       })
       .then((stateOfResults) => {
         this.setState({
-          searchResult: stateOfResults
+          searchResult: stateOfResults,
+          searchShownClass: 'city-results--shown'
         });
       });
   };
 
   handleSubmit = (e) => {
     e.preventDefault();
-    const resultLimit = 10;
+    const resultLimit = 5;
     const query = encodeURIComponent(this.state.value);
     const reqUrl = `https://api.teleport.org/api/cities/?search=${query}&limit=${resultLimit}`;
     if (query !== this.state.lastQuery) {
@@ -65,6 +67,15 @@ class CityFinder extends Component {
   handleChange = (e) => {
     this.setState({
       value: e.target.value
+    }, () => {
+      if (this.state.value === '') {
+        this.setState({
+          searchResult: [],
+          lastQuery: null,
+          gid: null,
+          searchShownClass: '',
+        })
+      }
     })
   };
 
@@ -85,14 +96,18 @@ class CityFinder extends Component {
 
   render() {
     return (
-      <div className={'city-finder-page--wrapper'}>
-        <label>Search a place</label>
-        <form onSubmit={this.handleSubmit} className={'searched-city--form'}>
-          <input type='text'
-                 value={this.state.value}
-                 onChange={this.handleChange}/>
-          <input type='submit'/>
-        </form>
+      <div className={`city-finder-page--wrapper ${this.state.searchShownClass}`}>
+        <div className={'city-finder-form--wrapper'}>
+          <div>
+            <p className={'city-finder--title'}>Find a city's tune</p></div>
+          <form onSubmit={this.handleSubmit} className={'searched-city--form'}>
+            <input type='text'
+                   value={this.state.value}
+                   placeholder={'places'}
+                   onChange={this.handleChange}/>
+            <input type='submit' value={'>'}/>
+          </form>
+        </div>
         <CityFinderResultList searchResult={this.state.searchResult}
                               citySelectHandler={this.citySelectHandler}/>
       </div>

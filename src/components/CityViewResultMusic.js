@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { FeatureWeather } from '../actions/WeatherToAudioFeature'
+import { FeatureWeather, spotifyGenres } from '../actions/WeatherToAudioFeature'
 import axios from 'axios'
 
 class CityViewMusic extends Component {
@@ -20,11 +20,15 @@ class CityViewMusic extends Component {
       }
     };
   }
+
   getRecommendations = () => {
+    const shuffled = spotifyGenres.sort(() => .5 - Math.random());
+    let selected = shuffled.slice(0,4).join(',') ;
+
     return axios({
       url: 'https://api.spotify.com/v1/recommendations',
       method: 'GET',
-      params: Object.assign(this.state.features, {seed_genres : 'dance,classical,hip-hop,acoustic,trance', limit: 5, min_popularity: 30}),
+      params: Object.assign(this.state.features, {seed_genres : selected+',pop', limit: 10, min_popularity: 20}),
       headers: {
         'Authorization': `Bearer ${this.state.spotifyAccessToken}`
       },
@@ -54,11 +58,10 @@ class CityViewMusic extends Component {
         this.setState({
           spotifyAccessToken: res.access_token,
           features: FeatureWeather(this.props.weather.cityTemp, this.props.weather.cityCond, this.props.weather.cityCondDescription, this.props.weather.cityWind)
-        }, () => {this.getRecommendations(); console.log(this.state.features)})
+        }, () => {this.getRecommendations()})
       })
       .catch(error => console.log(error));
   }
-
   renderSongs = () => {
     if (this.state.songsSet) {
       return (
@@ -76,7 +79,7 @@ class CityViewMusic extends Component {
       );
     } else {
       return (
-        <div>No songs right now</div>
+        <div>Loading... finding songs!</div>
       )
     }
   };

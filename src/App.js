@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link, withRouter } from 'react-router-dom'
+import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom'
 import CityFinder from './components/CityFinder'
 import CityView from './components/CityView'
 
@@ -17,9 +17,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <div>
-            <Link to='/'>Home</Link>
-            <hr/>
+          <div className={'weatherbox-page--wrapper'}>
             <Route exact path="/" component={CityFinderRouted}/>
             <Route exact path="/city/:gid" component={CityViewRouted}/>
           </div>

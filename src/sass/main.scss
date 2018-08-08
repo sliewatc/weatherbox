@@ -1,19 +1,126 @@
+@import url('https://fonts.googleapis.com/css?family=Hind:300,400|Ranga|Inconsolata');
+
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Inconsolata', sans-serif;
+  font-weight: 300;
+  color: #ffffff;
+  max-width: 100%;
+  height: 100%;
+  background: linear-gradient( rgba(0,0,0,.5), rgba(0,0,0,.5) ), url('https://i.ytimg.com/vi/2Xmmf07ISak/maxresdefault.jpg') no-repeat center center fixed;
+  background-size: cover;
+  background: #1a1e3d;
+}
+*, *::after, *::before {
+  box-sizing:border-box;
+}
+.weatherbox-page--wrapper {
+  width: 100%;
+}
+.city-finder-page--wrapper {
+  width: 100%;
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: center;
+  align-items: center;
+  transition: 0.5s ease;
+  overflow-y: auto;
+  padding: 30vh 5% 50px 5%;
+}
+.city-results--shown {
+  padding-top: 5vh;
+}
+.city-finder-form--wrapper {
+  width: 100%;
+}
+.city-finder--title {
+  font-size: 1.5rem;
+  color: rgba(255,255,255,0.9);
+  margin: 0.25rem 0;
+}
+.searched-city--form {
+  display: flex;
+  align-items: stretch;
+  max-width: 100%;
+
+  & input[type=text] {
+    padding: 1rem 0 0 0;
+    color: #d17c78;
+    background: transparent;
+    border: 0;
+    border-bottom: 2px solid #d17c78;
+    font-size: 2.5rem;
+    font-family: 'Inconsolata', sans-serif;
+    height: 5rem;
+    outline: 0;
+    width: 100%;
+
+    &::placeholder {
+      color: #653a38;
+    }
+  }
+  & input[type=submit] {
+    padding: 20px;
+    height: 5rem;
+    font-size: 3rem;
+    font-family: 'Inconsolata', 'Hind', sans-serif;
+    color: #d17c78;
+    border: 0;
+    border-bottom: 2px solid #d17c78;
+    background: transparent;
+    outline: 0;
+    cursor: pointer;
+    &:hover {
+      color: white;
+    }
+  }
+}
+.searched-cities--wrapper {
+  width: 100%;
+  font-size: 1.2rem;
 }
 .searched-city--item {
   cursor: pointer;
-  padding: 5px;
-  border: 1px solid #2d2d2d;
-  border-bottom: 0;
+  border-bottom: 2px solid #d17c78;
+  padding: 1rem 0.5rem;
+  background: rgba(0,0,0,0.4);
+  color: rgba(255,255,255,0.9);
+  box-sizing: border-box;
 
-  &:last-child {
-    border-bottom: 1px solid #2d2d2d;
-  }
   &:hover {
-    background: #2d2d2d;
+    background: rgba(0,0,0,0.25);
     color: white;
   }
+}
+.searched-city-item--country{
+  display: inline-block;
+}
+.searched-city-item--city {
+  font-size: 1.5rem;
+}
+.searched-city-item--altcity {
+  color: rgba(255,255,255,0.4);
+}
+.searched-city-item--region{
+  display: inline-block;
+  margin-right: 0.25em;
+}
+.searched-city-item--country {
+  padding-top: 1rem;
+}
+
+.city-view-loading--wrapper {
+  position:absolute;
+  max-height: 50vh;
+  max-width: 50vw;
+}
+
+.city-view-page--wrapper {
+  padding: 50px 5%;
+  width: 100%;
+  min-height: 100vh;
+}
+.city-view--city {
+  font-size: 2rem;
 }
