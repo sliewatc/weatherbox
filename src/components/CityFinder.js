@@ -28,13 +28,28 @@ class CityFinder extends Component {
       redirect: false,
       searchShownClass: '',
       searchUnlockScroll: '',
+      emptySearch: false,
     }
   }
 
   unlockPageHeight = () => {
     setTimeout(() => {
-      this.setState({ searchUnlockScroll: 'city-results--shown-unlock' });
+      this.setState({ searchUnlockScroll: 'city-results--shown-unlock' }, () => {
+        if (this.state.searchResult.length === 0) {
+          this.setState({
+            emptySearch: true,
+          })
+        }
+      });
     }, 500);
+  };
+
+  handleEmptySearch = () => {
+    if (this.state.emptySearch) {
+      return (
+        <div>Theres nothing here</div>
+      )
+    }
   };
 
   fetchCitiesFromAPI = (url) => {
@@ -82,6 +97,7 @@ class CityFinder extends Component {
           gid: null,
           searchShownClass: '',
           searchUnlockScroll: '',
+          emptySearch: false,
         })
       }
     })
@@ -117,6 +133,7 @@ class CityFinder extends Component {
             <input type='submit' value={'>'}/>
           </form>
         </div>
+         {this.handleEmptySearch()}
         <CityFinderResultList searchResult={this.state.searchResult}
                               citySelectHandler={this.citySelectHandler}/>
        </div>

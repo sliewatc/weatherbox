@@ -92,7 +92,7 @@ class CityViewMusic extends Component {
         <div className={'recommended-songs--wrapper'}>
           {this.state.tracks.map((result, id) => {
             return (
-              <a key={id} className={'song-listing--item'} target='_blank' href={result.uri}>
+              <a key={id} className={'song-listing--item'} href={result.uri}>
                 <img src={result.album.images[1].url}/>
                 <div className={'song-listing--info-wrapper'}>
                   <div className={'song-listing--trackname'}>{result.name}</div>
