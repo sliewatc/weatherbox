@@ -17,13 +17,17 @@ class CityViewResult extends Component {
   render () {
     return(
       <div className={'city-view-page--wrapper'}>
-        <Link to='/'>Home</Link>
-        <div className={'city-view--city'}>{this.props.weather.cityName}</div>
-        <p>
-          Weather: {this.props.weather.cityCond} - {this.props.weather.cityCondDescription} -
-          Wind: {this.props.weather.cityWind}m/s -
-          Temperature: {this.props.weather.cityTemp}°C
-        </p>
+        <div className={'city-view--city'}>
+          <Link className={'city-view--home-link'} to='/'>{'<'}</Link>
+          <span className={'city-view--cityname'}>{this.props.weather.cityName}</span>
+        </div>
+        <div className={'city-view--temp-wind'}>
+          <span className={'city-view--temperature'}>{this.props.weather.cityTemp}°C</span>
+          <span>Wind: {this.props.weather.cityWind}m/s</span>
+        </div>
+        <div className={'city-view--condition'}>
+          {this.props.weather.cityCond.toUpperCase()}: {this.props.weather.cityCondDescription}
+        </div>
         {this.renderMusic()}
       </div>
     )

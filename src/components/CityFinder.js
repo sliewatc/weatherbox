@@ -27,8 +27,15 @@ class CityFinder extends Component {
       gid: null,
       redirect: false,
       searchShownClass: '',
+      searchUnlockScroll: '',
     }
   }
+
+  unlockPageHeight = () => {
+    setTimeout(() => {
+      this.setState({ searchUnlockScroll: 'city-results--shown-unlock' });
+    }, 500);
+  };
 
   fetchCitiesFromAPI = (url) => {
     fetch(url)
@@ -47,7 +54,7 @@ class CityFinder extends Component {
         this.setState({
           searchResult: stateOfResults,
           searchShownClass: 'city-results--shown'
-        });
+        }, this.unlockPageHeight());
       });
   };
 
@@ -74,6 +81,7 @@ class CityFinder extends Component {
           lastQuery: null,
           gid: null,
           searchShownClass: '',
+          searchUnlockScroll: '',
         })
       }
     })
@@ -96,7 +104,8 @@ class CityFinder extends Component {
 
   render() {
     return (
-      <div className={`city-finder-page--wrapper ${this.state.searchShownClass}`}>
+      <div className={`city-finder-page--spacing-force-wrapper ${this.state.searchUnlockScroll}`}>
+       <div className={`city-finder-page--wrapper ${this.state.searchShownClass}`}>
         <div className={'city-finder-form--wrapper'}>
           <div>
             <p className={'city-finder--title'}>Find a city's tune</p></div>
@@ -110,6 +119,7 @@ class CityFinder extends Component {
         </div>
         <CityFinderResultList searchResult={this.state.searchResult}
                               citySelectHandler={this.citySelectHandler}/>
+       </div>
       </div>
     )
   }

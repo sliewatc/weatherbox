@@ -5,7 +5,9 @@ import axios from 'axios'
 class CityViewMusic extends Component {
   constructor(props) {
     super(props);
+    this.audio = new Audio();
     this.state = {
+      musicPlaying: false,
       songsSet: false,
       tracks: null,
       spotifyAccessToken: null,
@@ -38,6 +40,7 @@ class CityViewMusic extends Component {
           tracks: respond.data.tracks,
           songsSet: true,
         });
+        console.log(respond.data.tracks);
         return true;
       })
       .catch((error) => {
@@ -50,6 +53,26 @@ class CityViewMusic extends Component {
     const body = await response.json();
     if (response.status !== 200) throw Error(body.message);
     return body;
+  };
+
+  handleAudio = (preview_url) => {
+    if (!this.state.musicPlaying) {
+      this.audio.src = preview_url;
+      this.audio.load();
+      this.audio.play();
+      this.setState({
+        musicPlaying: true,
+      });
+    } else {
+      this.audio.pause();
+      this.audio.src = preview_url;
+      this.audio.load();
+      this.audio.play();
+      this.setState({
+        musicPlaying: true,
+      });
+    }
+
   };
 
   componentDidMount() {
@@ -65,21 +88,29 @@ class CityViewMusic extends Component {
   renderSongs = () => {
     if (this.state.songsSet) {
       return (
+
         <div className={'recommended-songs--wrapper'}>
-          <ul>
-            {this.state.tracks.map((result, id) => {
-              return (
-                <li key={id}>
-                  <a href={result.uri}>{result.name}</a>
-                </li>
-              )
-            })}
-          </ul>
+          {this.state.tracks.map((result, id) => {
+            return (
+              <a key={id} className={'song-listing--item'} target='_blank' href={result.uri}>
+                <img src={result.album.images[1].url}/>
+                <div className={'song-listing--info-wrapper'}>
+                  <div className={'song-listing--trackname'}>{result.name}</div>
+                  <div className={'song-listing--artist'}>{result.artists[0].name}</div>
+                </div>
+              </a>
+            )
+          })}
         </div>
       );
     } else {
       return (
-        <div>Loading... finding songs!</div>
+        <div className={'loading-wrapper'}>
+          <div className={'hollow-loader'}>
+            <div className={'large-box'}></div>
+            <div className={'small-box'}></div>
+          </div>
+        </div>
       )
     }
   };

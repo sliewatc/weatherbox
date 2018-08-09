@@ -17,14 +17,22 @@ body {
 .weatherbox-page--wrapper {
   width: 100%; }
 
+.city-finder-page--spacing-force-wrapper {
+  height: 100%;
+  width: 100%;
+  max-height: 100vh;
+  overflow: hidden; }
+
+.city-results--shown-unlock {
+  overflow-y: auto; }
+
 .city-finder-page--wrapper {
   width: 100%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  transition: 0.5s ease;
-  overflow-y: auto;
+  transition: 0.4s ease;
   padding: 30vh 5% 50px 5%; }
 
 .city-results--shown {
@@ -106,11 +114,123 @@ body {
   max-width: 50vw; }
 
 .city-view-page--wrapper {
-  padding: 50px 5%;
+  padding: 40px 5%;
   width: 100%;
   min-height: 100vh; }
 
 .city-view--city {
-  font-size: 2.5rem; }
+  font-size: 2.5rem;
+  margin-bottom: 1.35rem; }
+
+.city-view--temp-wind {
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: nowrap; }
+  .city-view--temp-wind span {
+    padding: 0.5em 0; }
+
+.city-view--condition {
+  margin-bottom: 1rem; }
+
+.city-view--home-link {
+  color: #d17c78;
+  text-decoration: none;
+  margin-right: 1rem;
+  padding: 0 1rem;
+  position: relative; }
+  .city-view--home-link:after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    height: 2px;
+    width: 100%;
+    background: #d17c78;
+    left: 0;
+    transform: translateX(0) scaleX(0);
+    transition: 0.1s ease; }
+  .city-view--home-link:hover:after {
+    transform: translateX(0) scaleX(1); }
+
+.recommended-songs--wrapper {
+  display: flex;
+  flex-flow: row wrap;
+  flex-basis: 100%; }
+  .recommended-songs--wrapper a {
+    color: rgba(255, 255, 255, 0.9);
+    text-decoration: none; }
+
+.song-listing--item {
+  display: flex;
+  flex: 40%;
+  margin: 0.5em 15px 0.5em 0;
+  cursor: pointer;
+  box-sizing: content-box;
+  position: relative; }
+  .song-listing--item > img {
+    max-height: 70px;
+    width: 70px; }
+  .song-listing--item:after {
+    display: none;
+    position: absolute;
+    top: -7px;
+    bottom: -7px;
+    right: -7px;
+    left: -7px;
+    border: 2px solid #d17c78;
+    content: ''; }
+  .song-listing--item:hover:after {
+    display: block; }
+
+.song-listing--info-wrapper {
+  padding-left: 1rem;
+  display: flex;
+  flex-flow: column nowrap; }
+
+.song-listing--trackname {
+  display: block;
+  word-break: break-all;
+  font-size: 1.25em; }
+
+.song-listing--artist {
+  display: block; }
+
+@media only screen and (max-width: 700px) {
+  .song-listing--item {
+    flex: 100%; } }
+.loading-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10vh; }
+  .loading-wrapper .hollow-loader {
+    width: 3em;
+    height: 3em;
+    animation: loaderAnim 1.25s infinite ease-in-out;
+    outline: 1px solid transparent; }
+    .loading-wrapper .hollow-loader .large-box {
+      height: 3em;
+      width: 3em;
+      background-color: #ECECEC;
+      outline: 1px solid transparent;
+      position: fixed; }
+    .loading-wrapper .hollow-loader .small-box {
+      height: 3em;
+      width: 3em;
+      background-color: #34495e;
+      position: fixed;
+      z-index: 1;
+      outline: 1px solid transparent;
+      animation: smallBoxAnim 1.25s alternate infinite ease-in-out; }
+
+@keyframes smallBoxAnim {
+  0% {
+    transform: scale(0.2); }
+  100% {
+    transform: scale(0.75); } }
+@keyframes loaderAnim {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(90deg); } }
 
 /*# sourceMappingURL=main.css.map */
