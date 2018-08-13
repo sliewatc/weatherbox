@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import CityFinderResultList from './CityFinderResultList'
+const spotifyKeys = require('../actions/ApiKeys');
 
 // matching_full_name field returns a value in the form "{city}, {region}, {country} ({alternate name})"
 function parseCityListing(listing) {
@@ -41,15 +42,7 @@ class CityFinder extends Component {
           })
         }
       });
-    }, 500);
-  };
-
-  handleEmptySearch = () => {
-    if (this.state.emptySearch) {
-      return (
-        <div>Theres nothing here</div>
-      )
-    }
+    }, 425);
   };
 
   fetchCitiesFromAPI = (url) => {
@@ -68,6 +61,7 @@ class CityFinder extends Component {
       .then((stateOfResults) => {
         this.setState({
           searchResult: stateOfResults,
+          emptySearch: false,
           searchShownClass: 'city-results--shown'
         }, this.unlockPageHeight());
       });
@@ -112,6 +106,19 @@ class CityFinder extends Component {
     });
   };
 
+  renderFinderTitle = () => {
+    let accessToken = sessionStorage.getItem('access_token');
+    if (accessToken) {
+      return (
+        <p className={'city-finder--title'}>Find a city's tune</p>
+      )
+    } else {
+      return (
+        <p className={'city-finder--title'}><a className={'city-finder--title-connect'} href="http://localhost:5000/api/spotify/login">Connect</a> to find a city's tune</p>
+      )
+    }
+  };
+
   renderRedirect =  () => {
     if (this.state.redirect) {
       this.props.history.push(`/city/${this.state.gid}`);
@@ -123,8 +130,7 @@ class CityFinder extends Component {
       <div className={`city-finder-page--spacing-force-wrapper ${this.state.searchUnlockScroll}`}>
        <div className={`city-finder-page--wrapper ${this.state.searchShownClass}`}>
         <div className={'city-finder-form--wrapper'}>
-          <div>
-            <p className={'city-finder--title'}>Find a city's tune</p></div>
+          {this.renderFinderTitle()}
           <form onSubmit={this.handleSubmit} className={'searched-city--form'}>
             <input type='text'
                    value={this.state.value}
@@ -133,7 +139,7 @@ class CityFinder extends Component {
             <input type='submit' value={'>'}/>
           </form>
         </div>
-         {this.handleEmptySearch()}
+         {this.state.emptySearch ? <div className={'city-finder--no-results'}>There's nothing here!</div> : ''}
         <CityFinderResultList searchResult={this.state.searchResult}
                               citySelectHandler={this.citySelectHandler}/>
        </div>

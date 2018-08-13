@@ -1,15 +1,15 @@
-@import url("https://fonts.googleapis.com/css?family=Hind:300,400|Ranga|Inconsolata");
+@import url("https://fonts.googleapis.com/css?family=Quicksand");
+@import url("https://fonts.googleapis.com/css?family=Playfair+Display");
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Inconsolata', sans-serif;
+  font-family: 'Quicksand', sans-serif;
   font-weight: 300;
   color: #ffffff;
   max-width: 100%;
   height: 100%;
-  background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url("https://i.ytimg.com/vi/2Xmmf07ISak/maxresdefault.jpg") no-repeat center center fixed;
   background-size: cover;
-  background: #1a1e3d; }
+  background: #15161e; }
 
 *, *::after, *::before {
   box-sizing: border-box; }
@@ -32,6 +32,8 @@ body {
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
+  max-width: 800px;
+  margin: 0 auto;
   transition: 0.4s ease;
   padding: 30vh 5% 50px 5%; }
 
@@ -41,10 +43,19 @@ body {
 .city-finder-form--wrapper {
   width: 100%; }
 
+.city-finder--no-results {
+  font-size: 1.5rem;
+  margin-top: 20vh;
+  color: rgba(255, 255, 255, 0.5); }
+
 .city-finder--title {
   font-size: 1.5rem;
   color: rgba(255, 255, 255, 0.9);
   margin: 0.25rem 0; }
+
+.city-finder--title-connect {
+  color: #1fab50;
+  text-decoration: none; }
 
 .searched-city--form {
   display: flex;
@@ -57,7 +68,7 @@ body {
     border: 0;
     border-bottom: 2px solid #d17c78;
     font-size: 2.5rem;
-    font-family: 'Inconsolata', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     height: 5rem;
     outline: 0;
     width: 100%; }
@@ -67,7 +78,7 @@ body {
     padding: 20px;
     height: 5rem;
     font-size: 3rem;
-    font-family: 'Inconsolata', 'Hind', sans-serif;
+    font-family: 'Quicksand', sans-serif;
     color: #d17c78;
     border: 0;
     border-bottom: 2px solid #d17c78;
@@ -83,20 +94,21 @@ body {
 
 .searched-city--item {
   cursor: pointer;
-  border-bottom: 2px solid #d17c78;
-  padding: 1rem 0.5rem;
-  background: rgba(0, 0, 0, 0.4);
-  color: rgba(255, 255, 255, 0.9);
-  box-sizing: border-box; }
+  margin-top: 3px;
+  padding: 1rem 0;
+  box-sizing: border-box;
+  transition: 0.2s ease; }
+  .searched-city--item:not(:first-child) {
+    border-top: 2px solid rgba(255, 255, 255, 0.3); }
   .searched-city--item:hover {
-    background: rgba(0, 0, 0, 0.25);
-    color: white; }
+    padding-left: 1.25rem; }
 
 .searched-city-item--country {
   display: inline-block; }
 
 .searched-city-item--city {
-  font-size: 1.5rem; }
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.95); }
 
 .searched-city-item--altcity {
   color: rgba(255, 255, 255, 0.4); }
@@ -118,19 +130,43 @@ body {
   width: 100%;
   min-height: 100vh; }
 
-.city-view--city {
-  font-size: 2.5rem;
-  margin-bottom: 1.35rem; }
-
-.city-view--temp-wind {
+.city-view--weather-wrapper {
   justify-content: space-between;
   display: flex;
-  flex-wrap: nowrap; }
-  .city-view--temp-wind span {
-    padding: 0.5em 0; }
+  flex-wrap: wrap;
+  align-items: flex-end;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  border-bottom: 2px solid #d17c78; }
 
-.city-view--condition {
-  margin-bottom: 1rem; }
+.city-view--city {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.75rem;
+  margin-bottom: 1.35rem; }
+
+.city-view--temperature {
+  font-size: 1.5rem;
+  color: white; }
+
+.city-view--condition-left {
+  font-size: 1.15rem; }
+
+.city-view--wind {
+  padding: 0 0 0.25rem 0;
+  font-size: 1.25rem; }
+  .city-view--wind:before {
+    content: '\f050';
+    font-size: 1.25em;
+    font-family: 'weathericons', sans-serif;
+    margin-right: 1rem; }
+
+.city-view--weather-icon {
+  margin-right: 1rem; }
+
+.city-view--desc {
+  padding: 0 0 0.25rem 0;
+  display: block;
+  font-size: 1.5rem; }
 
 .city-view--home-link {
   color: #d17c78;
@@ -151,6 +187,23 @@ body {
   .city-view--home-link:hover:after {
     transform: translateX(0) scaleX(1); }
 
+.song-listing--refresh-music {
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0; }
+  .song-listing--refresh-music > button {
+    background: 0;
+    outline: 0;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    border: 1px solid #d17c78;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 1.25rem; }
+    .song-listing--refresh-music > button:hover {
+      background: #d17c78;
+      color: #1a1e3d; }
+
 .recommended-songs--wrapper {
   display: flex;
   flex-flow: row wrap;
@@ -161,25 +214,21 @@ body {
 
 .song-listing--item {
   display: flex;
-  flex: 40%;
-  margin: 0.5em 15px 0.5em 0;
+  flex: 30%;
+  padding: 1rem 15px 1rem 0;
   cursor: pointer;
   box-sizing: content-box;
-  position: relative; }
-  .song-listing--item > img {
-    max-height: 70px;
-    width: 70px; }
-  .song-listing--item:after {
-    display: none;
-    position: absolute;
-    top: -7px;
-    bottom: -7px;
-    right: -7px;
-    left: -7px;
-    border: 2px solid #d17c78;
-    content: ''; }
-  .song-listing--item:hover:after {
-    display: block; }
+  position: relative;
+  align-items: flex-start; }
+  .song-listing--item > .song-listing--item-album-img {
+    transition: 0.2s ease-in-out;
+    display: block;
+    position: relative; }
+    .song-listing--item > .song-listing--item-album-img > img {
+      max-height: 150px;
+      max-width: 150px; }
+  .song-listing--item:hover > .song-listing--item-album-img {
+    transform: translateX(15%); }
 
 .song-listing--info-wrapper {
   padding-left: 1rem;
@@ -188,15 +237,40 @@ body {
 
 .song-listing--trackname {
   display: block;
-  word-break: break-all;
+  word-break: break-word;
   font-size: 1.25em; }
 
 .song-listing--artist {
   display: block; }
 
-@media only screen and (max-width: 700px) {
+@media only screen and (min-width: 700px) {
+  .song-listing--info-wrapper {
+    background: #2d324c;
+    padding: 15px 10px;
+    color: #1a1e3d;
+    border: 1px solid #15161e;
+    box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.7);
+    transform: translateX(-10%);
+    margin-top: 2rem; }
+    .song-listing--info-wrapper .song-listing--trackname {
+      color: white; }
+    .song-listing--info-wrapper .song-listing--artist {
+      color: #ee8d89; } }
+@media only screen and (max-width: 1280px) {
   .song-listing--item {
-    flex: 100%; } }
+    flex: 35%; }
+    .song-listing--item > img {
+      max-width: 125px;
+      max-height: 125px; } }
+@media only screen and (max-width: 700px) {
+  .city-view--home-link {
+    display: none; }
+
+  .song-listing--item {
+    flex: 100%; }
+    .song-listing--item > img {
+      max-width: 70px;
+      max-height: 70px; } }
 .loading-wrapper {
   width: 100%;
   display: flex;

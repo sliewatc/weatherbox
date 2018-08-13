@@ -26,9 +26,11 @@ class CityView extends Component {
         return raw.json();
       })
       .then((respJson) => {
+        console.log(respJson);
         this.setState({
           cityName: respJson.name,
           cityTemp: (respJson.main.temp - 273.15).toFixed(1),
+          cityCondID: respJson.weather[0].id,
           cityCond: respJson.weather[0].main,
           cityCondDescription: respJson.weather[0].description,
           cityWind: respJson.wind.speed,

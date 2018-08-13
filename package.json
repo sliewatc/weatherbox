@@ -5,6 +5,7 @@
   "proxy": "http://localhost:5000/",
   "dependencies": {
     "assign": "^0.1.7",
+    "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "minipass": "^2.3.3",
     "mkdirp": "^0.5.1",
