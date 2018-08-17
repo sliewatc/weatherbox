@@ -9,6 +9,7 @@ class CityViewMusic extends Component {
     this.state = {
       songsSet: false,
       tracks: null,
+      libraryChecked: false,
       trackInLibraryMap: []
     };
   }
@@ -38,7 +39,8 @@ class CityViewMusic extends Component {
     this.setState({
       songsSet: false,
       tracks: null,
-      trackInLibraryMap: []
+      trackInLibraryMap: [],
+      libraryChecked: false,
     });
     this.getTracks();
   };
@@ -83,6 +85,7 @@ class CityViewMusic extends Component {
           }, () => {
             this.setState({
               songsSet: true,
+              libraryChecked: true,
             })
           })
         } else {
@@ -90,6 +93,13 @@ class CityViewMusic extends Component {
         }
       })
       .catch(err => {
+        this.setState({
+          tracks: tracks,
+        }, () => {
+          this.setState({
+            songsSet: true,
+          })
+        })
         console.log(err);
       })
   };
@@ -162,6 +172,7 @@ class CityViewMusic extends Component {
                 key={index}
                 trackData={result}
                 inLibrary={this.state.trackInLibraryMap[index]}
+                libraryChecked={this.state.libraryChecked}
                 handleSongClick={this.handleSongClick}/>);
             })}
           </div>

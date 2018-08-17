@@ -10,6 +10,10 @@ class CityViewResultMusicItem extends Component {
   }
 
   handleRemoveSong = (e, trackId) => {
+    if (this.props.libraryChecked === false){
+      return;
+    }
+
     e.stopPropagation();
     axios({
       headers: {
@@ -33,6 +37,10 @@ class CityViewResultMusicItem extends Component {
   };
 
   handleSaveSong = (e, trackId) => {
+    if (this.props.libraryChecked === false){
+      return;
+    }
+
     e.stopPropagation();
     axios({
       headers: {
@@ -57,6 +65,9 @@ class CityViewResultMusicItem extends Component {
   };
 
   renderSaveButton = () => {
+    if (this.props.libraryChecked === false) {
+      return;
+    }
     if (this.state.songInLibrary) {
       return (<button className={'song-listing--save-song song-listing--song-in-library'} onClick={(event) => {this.handleRemoveSong(event, this.props.trackData.id)}}></button>);
     } else  {

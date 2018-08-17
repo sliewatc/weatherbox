@@ -22,7 +22,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <div className={'weatherbox-page--wrapper'}>
-            <Route expact path="/user/login/settoken" component={SetImplicitToken}/>
+            <Route path="/user/login/settoken" component={SetImplicitToken}/>
             <Route exact path="/" component={CityFinderRouted}/>
             <Route exact path="/city/:gid" component={CityViewRouted}/>
           </div>
