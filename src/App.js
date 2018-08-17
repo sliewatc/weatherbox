@@ -4,6 +4,7 @@ import CityFinder from './components/CityFinder'
 import CityView from './components/CityView'
 import SetImplicitToken from './components/SetImplicitToken'
 
+const SetImplicitTokenRouted = withRouter(SetImplicitToken);
 const CityViewRouted = withRouter(CityView);
 const CityFinderRouted = withRouter(CityFinder);
 
@@ -22,7 +23,7 @@ class App extends Component {
       <div className="App">
         <Router>
           <div className={'weatherbox-page--wrapper'}>
-            <Route path="/user/login/settoken" component={SetImplicitToken}/>
+            <Route path="/user/login/settoken" component={SetImplicitTokenRouted}/>
             <Route exact path="/" component={CityFinderRouted}/>
             <Route exact path="/city/:gid" component={CityViewRouted}/>
           </div>
