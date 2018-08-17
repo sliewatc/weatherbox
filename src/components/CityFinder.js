@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import axios from 'axios'
 import CityFinderResultList from './CityFinderResultList'
 
 // matching_full_name field returns a value in the form "{city}, {region}, {country} ({alternate name})"
@@ -113,7 +114,7 @@ class CityFinder extends Component {
       )
     } else {
       return (
-        <p className={'city-finder--title'}><a className={'city-finder--title-connect'} href={`http://localhost:5000/api/spotify/login`}>Connect</a> to find a city's tune</p>
+        <p className={'city-finder--title'}><a className={'city-finder--title-connect'} href={'http://localhost:5000/api/spotify/login'}>Connect</a> to find a city's tune</p>
       )
     }
   };
@@ -127,21 +128,21 @@ class CityFinder extends Component {
   render() {
     return (
       <div className={`city-finder-page--spacing-force-wrapper ${this.state.searchUnlockScroll}`}>
-       <div className={`city-finder-page--wrapper ${this.state.searchShownClass}`}>
-        <div className={'city-finder-form--wrapper'}>
-          {this.renderFinderTitle()}
-          <form onSubmit={this.handleSubmit} className={'searched-city--form'}>
-            <input type='text'
-                   value={this.state.value}
-                   placeholder={'places'}
-                   onChange={this.handleChange}/>
-            <input type='submit' value={'>'}/>
-          </form>
+        <div className={`city-finder-page--wrapper ${this.state.searchShownClass}`}>
+          <div className={'city-finder-form--wrapper'}>
+            {this.renderFinderTitle()}
+            <form onSubmit={this.handleSubmit} className={'searched-city--form'}>
+              <input type='text'
+                     value={this.state.value}
+                     placeholder={'places'}
+                     onChange={this.handleChange}/>
+              <input type='submit' value={'>'}/>
+            </form>
+          </div>
+          {this.state.emptySearch ? <div className={'city-finder--no-results'}>There's nothing here!</div> : ''}
+          <CityFinderResultList searchResult={this.state.searchResult}
+                                citySelectHandler={this.citySelectHandler}/>
         </div>
-         {this.state.emptySearch ? <div className={'city-finder--no-results'}>There's nothing here!</div> : ''}
-        <CityFinderResultList searchResult={this.state.searchResult}
-                              citySelectHandler={this.citySelectHandler}/>
-       </div>
       </div>
     )
   }

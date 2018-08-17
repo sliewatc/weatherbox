@@ -3,7 +3,6 @@ const express = require('express');
 const axios = require('axios');
 const spotifyKeys = require('../actions/ApiKeys');
 const bodyParser = require('body-parser');
-const path = require('path');
 
 const spotifyGenres = helpers.spotifyGenres;
 const FeatureWeather = helpers.FeatureWeather;
