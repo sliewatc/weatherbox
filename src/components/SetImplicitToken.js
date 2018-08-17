@@ -13,7 +13,8 @@ const getHashParams = () => {
 const setImplicitAccessToken = async () => {
   let params = getHashParams();
   let access_token = params.access_token;
-  sessionStorage.setItem('access_token', access_token);
+  localStorage.setItem('access_token', access_token);
+  localStorage.setItem('token_set_timestamp', Date.now());
   return access_token;
 };
 
@@ -21,7 +22,6 @@ class SetImplicitToken extends Component {
   componentDidMount() {
     setImplicitAccessToken()
       .then((token) => {
-        console.log(token);
         window.location.replace('/');
       })
       .catch(err => {

@@ -3,6 +3,7 @@ const express = require('express');
 const axios = require('axios');
 const spotifyKeys = require('../actions/ApiKeys');
 const bodyParser = require('body-parser');
+const path = require('path');
 
 const spotifyGenres = helpers.spotifyGenres;
 const FeatureWeather = helpers.FeatureWeather;
@@ -95,9 +96,8 @@ const spotifyLoginImplicitGrant = async () => {
   url += '?response_type=token';
   url += '&client_id=' + encodeURIComponent(spotifyClientID);
   url += '&scope=' + encodeURIComponent('user-read-currently-playing user-modify-playback-state user-read-playback-state');
-  url += '&redirect_uri=' + encodeURIComponent('http://localhost:3000/user/login/settoken');
+  url += '&redirect_uri=' + encodeURIComponent(`http://localhost:3000/user/login/settoken`);
   url += '&show_dialog=true';
-
   return url;
 };
 
@@ -126,6 +126,7 @@ app.post('/api/songs', (req, res) => {
 });
 
 app.get('/api/spotify/login', (req, res) => {
+  console.log('listening');
   spotifyLoginImplicitGrant()
     .then(spotifyAuthorizeUrl => {
       res.redirect(spotifyAuthorizeUrl);

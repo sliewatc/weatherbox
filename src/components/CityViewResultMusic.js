@@ -11,38 +11,81 @@ class CityViewMusic extends Component {
   }
 
   getSpotifySongs = async () => {
-    const response = await fetch('/api/songs', {
+    const songs = fetch('/api/songs', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
       method: 'POST',
-      body: JSON.stringify({
-        weather: this.props.weather,
+      body: JSON.stringify({ weather: this.props.weather })
+    })
+      .then(data => {
+        return data;
       })
-    });
-    const songs = await response.json();
-    if (response.status !== 200) throw Error(songs.message);
+      .then(resp => {
+        return resp.json();
+      })
+      .catch(err => {
+        console.log(err)
+      });
     return songs;
   };
 
   handleSongClick = (uri) => {
-    let accessToken = sessionStorage.getItem('access_token');
+
     axios({
-      url: 'https://api.spotify.com/v1/me/player/play',
-      method: 'PUT',
-      data: {
-        uris: this.trackUris,
-        offset: {"uri": uri},
-      },
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
       },
+      url: 'https://api.spotify.com/v1/me/player/devices'
     })
-      .catch((error) => {
-        console.log(error);
+      .then(resp => {
+        let index = 0;
+        while(resp.data.devices[index]) {
+          if (resp.data.devices[index].is_active && !resp.data.devices[index].is_restricted) {
+            return resp.data.devices[index].id;
+          }
+          index++;
+        }
+        if (typeof resp.data.devices[0] !== 'undefined') {
+          return resp.data.devices[0].id
+        }
+        throw Error('Cannot find an available device to play on.')
+      })
+      .then((device) => {
+        axios({
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+          },
+          url: 'https://api.spotify.com/v1/me/player/play',
+          method: 'PUT',
+          params: {
+            device_id: device,
+          },
+          data: {
+            uris: this.trackUris,
+            offset: {"uri": uri},
+          }
+        })
+          .catch(err => {
+            console.log(err);
+            if (!err.response.status) return;
+
+            // Error 400 - Bad Request, malformed query probably
+            // Error 401 - Unauthorized, access token not set
+            // Error 403 - User is non premium
+            // Error 404 - No active device found
+            let errorStatus = err.response.status;
+            if (errorStatus === 400) {
+            }
+          })
+      })
+      .catch(err => {
+        console.log(err);
       });
   };
 
@@ -75,6 +118,7 @@ class CityViewMusic extends Component {
         console.log(err);
       })
   }
+
   renderSongs = () => {
     if (this.state.songsSet) {
       return (

@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import CityFinderResultList from './CityFinderResultList'
-const spotifyKeys = require('../actions/ApiKeys');
 
 // matching_full_name field returns a value in the form "{city}, {region}, {country} ({alternate name})"
 function parseCityListing(listing) {
@@ -107,14 +106,14 @@ class CityFinder extends Component {
   };
 
   renderFinderTitle = () => {
-    let accessToken = sessionStorage.getItem('access_token');
-    if (accessToken) {
+    let accessToken = localStorage.getItem('access_token');
+    if (accessToken !== 'undefined' && accessToken !== undefined && accessToken !== null && typeof accessToken !== 'undefined') {
       return (
         <p className={'city-finder--title'}>Find a city's tune</p>
       )
     } else {
       return (
-        <p className={'city-finder--title'}><a className={'city-finder--title-connect'} href="http://localhost:5000/api/spotify/login">Connect</a> to find a city's tune</p>
+        <p className={'city-finder--title'}><a className={'city-finder--title-connect'} href={`http://localhost:5000/api/spotify/login`}>Connect</a> to find a city's tune</p>
       )
     }
   };

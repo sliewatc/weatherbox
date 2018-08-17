@@ -9,6 +9,7 @@
 # sec
 /src/actions/ApiKeys.js
 /.idea
+.env
 
 # production
 /build

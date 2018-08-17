@@ -15,7 +15,14 @@ class App extends Component {
   }
 
   componentDidMount() {
-    console.log(sessionStorage.getItem('access_token'));
+    console.log('token set: ' + localStorage.getItem('access_token'));
+
+    const HOUR = 1000 * 60 * 60;
+    const hourAgo = Date.now() - HOUR;
+    if (localStorage.getItem('token_set_timestamp') < hourAgo) {
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('token_set_timestamp');
+    }
   }
 
   render() {
