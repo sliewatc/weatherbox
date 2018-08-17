@@ -6,6 +6,7 @@
   "dependencies": {
     "assign": "^0.1.7",
     "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "minipass": "^2.3.3",
     "mkdirp": "^0.5.1",
@@ -20,7 +21,9 @@
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "1.1.4",
+    "serve": "^9.4.2",
     "spotify-web-api-js": "^0.24.0",
+    "url-parse": "^1.4.3",
     "wrappy": "^1.0.2",
     "yallist": "^3.0.2"
   },

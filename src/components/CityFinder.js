@@ -114,7 +114,7 @@ class CityFinder extends Component {
       )
     } else {
       return (
-        <p className={'city-finder--title'}><a className={'city-finder--title-connect'} href="http://localhost:5000/api/spotify/login">Connect</a> to find a city's tune</p>
+        <p className={'city-finder--title'}><a className={'city-finder--title-connect'} href="http://138.197.152.175:5000/api/spotify/login">Connect</a> to find a city's tune</p>
       )
     }
   };

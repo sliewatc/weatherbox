@@ -95,7 +95,7 @@ const spotifyLoginImplicitGrant = async () => {
   url += '?response_type=token';
   url += '&client_id=' + encodeURIComponent(spotifyClientID);
   url += '&scope=' + encodeURIComponent('user-read-currently-playing user-modify-playback-state user-read-playback-state');
-  url += '&redirect_uri=' + encodeURIComponent('http://weatherbox.me/user/login/settoken');
+  url += '&redirect_uri=' + encodeURIComponent('http://138.197.152.175http://138.197.152.175:3000/user/login/settoken':3000/user/login/settoken');
   url += '&show_dialog=true';
 
   return url;
