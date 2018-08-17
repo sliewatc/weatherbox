@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 
+import CityViewResultMusicItem from './CityViewResultMusicItem'
+
 class CityViewMusic extends Component {
   constructor(props) {
     super(props);
     this.state = {
       songsSet: false,
       tracks: null,
+      trackInLibraryMap: []
     };
   }
 
@@ -31,8 +34,67 @@ class CityViewMusic extends Component {
     return songs;
   };
 
-  handleSongClick = (uri) => {
+  refreshMusic = () => {
+    this.setState({
+      songsSet: false,
+      tracks: null,
+      trackInLibraryMap: []
+    });
+    this.getTracks();
+  };
 
+  componentDidMount() {
+    this.trackUris = [];
+    this.getTracks()
+  }
+
+  getTracks = () => {
+    this.getSpotifySongs()
+      .then((tracks) => {
+        this.checkSongs(tracks);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+  };
+
+  checkSongs = (tracks) => {
+    let tempLibraryCheck = [];
+    tracks.forEach((track) => {
+      tempLibraryCheck.push(track.id)
+    });
+    axios({
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${localStorage.getItem('access_token')}`
+      },
+      url: 'https://api.spotify.com/v1/me/tracks/contains',
+      method: 'GET',
+      params: {
+        ids: tempLibraryCheck.join(',')
+      },
+    })
+      .then(resp => {
+        if (resp.status === 200) {
+          this.setState({
+            tracks: tracks,
+            trackInLibraryMap: resp.data
+          }, () => {
+            this.setState({
+              songsSet: true,
+            })
+          })
+        } else {
+          throw Error(resp.status)
+        }
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  };
+
+  handleSongClick = (uri) => {
     axios({
       headers: {
         'Accept': 'application/json',
@@ -89,54 +151,18 @@ class CityViewMusic extends Component {
       });
   };
 
-  refreshMusic = () => {
-    this.setState({
-      songsSet: false,
-    });
-    this.getSpotifySongs()
-      .then((tracks) => {
-        this.setState({
-          songsSet: true,
-          tracks: tracks,
-        })
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  };
-
-  componentDidMount() {
-    this.trackUris = [];
-    this.getSpotifySongs()
-      .then((tracks) => {
-        this.setState({
-          songsSet: true,
-          tracks: tracks,
-        })
-      })
-      .catch((err) => {
-        console.log(err);
-      })
-  }
-
   renderSongs = () => {
     if (this.state.songsSet) {
       return (
         <React.Fragment>
           <div className={'recommended-songs--wrapper'}>
-            {this.state.tracks.map((result, id) => {
+            {this.state.tracks.map((result, index) => {
               this.trackUris.push(result.uri);
-              return (
-                <a key={id} className={'song-listing--item'} onClick={() => {this.handleSongClick(result.uri)}}>
-                  <div className={'song-listing--item-album-img'}>
-                    <img src={result.album.images[1].url} alt={result.album.name}/>
-                  </div>
-                  <div className={'song-listing--info-wrapper'}>
-                    <div className={'song-listing--trackname'}>{result.name}</div>
-                    <div className={'song-listing--artist'}>{result.artists[0].name}</div>
-                  </div>
-                </a>
-              )
+              return (<CityViewResultMusicItem
+                key={index}
+                trackData={result}
+                inLibrary={this.state.trackInLibraryMap[index]}
+                handleSongClick={this.handleSongClick}/>);
             })}
           </div>
           <div className={'song-listing--refresh-music'}>

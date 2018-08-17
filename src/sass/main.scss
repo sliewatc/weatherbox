@@ -244,7 +244,7 @@ body {
 .song-listing--item {
   display: flex;
   flex: 30%;
-  padding: 1rem 15px 1rem 0;
+  padding: 1rem 40px 1rem 0;
   cursor: pointer;
   box-sizing: content-box;
   position: relative;
@@ -280,11 +280,46 @@ body {
 .song-listing--artist {
   display: block;
 }
+.song-listing--save-song {
+  background: 0;
+  border: 0;
+  outline: 0;
+  font-family: serif;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 0;
+
+  &:after {
+    content: '+';
+    color: #808080;
+    padding: 0 10px;
+    font-weight: 200;
+    font-size: 2rem;
+    transition: 0.3s ease;
+  }
+
+  &:hover:after {
+    color: #d0d0d0;
+  }
+}
+
+.song-listing--song-in-library {
+  &:after {
+    font-size: 24px;
+    content: '\2713';
+    font-family: serif;
+  }
+  &:hover:after {
+    color: #d17c78;
+  }
+}
 
 @media only screen and (min-width: 700px) {
   .song-listing--info-wrapper{
     background: #2d324c;
-    padding: 15px 10px;
+    padding: 15px 50px 15px 10px;
     color: #1a1e3d;
     border: 1px solid #15161e;
     box-shadow: 1px 1px 4px rgba(0,0,0,0.7);

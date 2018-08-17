@@ -66,7 +66,7 @@ const sendRecommendationsRequest = (accessToken, features, genres) => {
   return axios({
     url: 'https://api.spotify.com/v1/recommendations',
     method: 'GET',
-    params: Object.assign(features, {seed_genres : genres, limit: 12, min_popularity: 30}),
+    params: Object.assign(features, {seed_genres : genres, limit: 12, min_popularity: 25}),
     headers: {
       'Authorization': `Bearer ${accessToken}`
     },
@@ -94,7 +94,7 @@ const spotifyLoginImplicitGrant = async () => {
   let url = 'https://accounts.spotify.com/authorize';
   url += '?response_type=token';
   url += '&client_id=' + encodeURIComponent(spotifyClientID);
-  url += '&scope=' + encodeURIComponent('user-read-currently-playing user-modify-playback-state user-read-playback-state');
+  url += '&scope=' + encodeURIComponent('user-read-currently-playing user-modify-playback-state user-read-playback-state user-library-modify user-library-read');
   url += '&redirect_uri=' + encodeURIComponent(`http://localhost:3000/user/login/settoken`);
   url += '&show_dialog=true';
   return url;

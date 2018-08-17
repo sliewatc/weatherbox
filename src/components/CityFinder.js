@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import axios from 'axios'
 import CityFinderResultList from './CityFinderResultList'
 
 // matching_full_name field returns a value in the form "{city}, {region}, {country} ({alternate name})"
@@ -30,7 +29,19 @@ class CityFinder extends Component {
       searchShownClass: '',
       searchUnlockScroll: '',
       emptySearch: false,
+    };
+
+    // Handle token expiry
+    console.log('token set: ' + localStorage.getItem('access_token'));
+    const HOUR = 1000 * 60 * 60;
+    const hourAgo = Date.now() - HOUR;
+    if (localStorage.getItem('token_set_timestamp') < hourAgo) {
+      localStorage.removeItem('access_token');
+      localStorage.removeItem('token_set_timestamp');
     }
+  }
+
+  componentDidMount() {
   }
 
   unlockPageHeight = () => {
