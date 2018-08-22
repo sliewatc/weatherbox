@@ -11,7 +11,7 @@ body {
   background-size: cover;
   background: #15161e; }
   body::after {
-    position: absolute;
+    position: fixed;
     content: "";
     top: 0;
     bottom: 0;
@@ -91,8 +91,9 @@ body {
   .city-finder--title-connect .city-finder--title-spotify {
     transition: 0.1s ease-in-out; }
   .city-finder--title-connect:hover, .city-finder--title-connect:focus {
-    border: none;
-    padding-left: 0; }
+    border-color: transparent;
+    padding-left: 0;
+    padding-right: 20px; }
     .city-finder--title-connect:hover .city-finder--title-spotify, .city-finder--title-connect:focus .city-finder--title-spotify {
       color: #1bbc54; }
 
@@ -132,6 +133,7 @@ body {
   font-size: 1.2rem; }
 
 .searched-city--item {
+  display: block;
   cursor: pointer;
   margin-top: 3px;
   padding: 1rem 0;

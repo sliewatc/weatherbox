@@ -33,7 +33,6 @@ class CityFinder extends Component {
     };
 
     // Handle token expiry
-    console.log('token set: ' + localStorage.getItem('access_token'));
     const HOUR = 1000 * 60 * 60;
     const hourAgo = Date.now() - HOUR;
     if (localStorage.getItem('token_set_timestamp') < hourAgo) {

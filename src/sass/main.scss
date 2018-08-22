@@ -14,7 +14,7 @@ body {
   background: #15161e;
 
   &::after {
-    position: absolute;
+    position: fixed;
     content: "";
     top: 0;
     bottom: 0;
@@ -101,8 +101,9 @@ body {
   }
 
   &:hover, &:focus {
-    border: none;
+    border-color: transparent;
     padding-left: 0;
+    padding-right: 20px;
 
     & .city-finder--title-spotify {
       color: #1bbc54;
@@ -151,6 +152,7 @@ body {
   font-size: 1.2rem;
 }
 .searched-city--item {
+  display: block;
   cursor: pointer;
   margin-top: 3px;
   padding: 1rem 0;
