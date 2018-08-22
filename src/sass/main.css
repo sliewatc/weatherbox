@@ -32,7 +32,7 @@ body {
   flex-flow: column nowrap;
   justify-content: flex-start;
   align-items: flex-start;
-  max-width: 800px;
+  max-width: 1280px;
   margin: 0 auto;
   min-height: 100vh;
   transition: padding 0.4s ease;
@@ -48,7 +48,8 @@ body {
   font-size: 2em;
   opacity: 0.2;
   text-transform: uppercase;
-  transition: 0.4s ease; }
+  transition: 0.4s ease;
+  pointer-events: none; }
   .city-results--shown .city-finder--page-title {
     transform: translateY(-30vh); }
 
@@ -369,8 +370,6 @@ body {
   padding: 1rem 0; }
   .about-weatherbox--wrapper .about-weatherbox--center {
     color: rgba(255, 255, 255, 0.8); }
-  .about-weatherbox--wrapper .about-weatherbox--primary {
-    font-size: 1.25rem; }
 
 .credit-to-me {
   position: absolute;

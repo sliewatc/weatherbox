@@ -145,7 +145,6 @@ class CityFinder extends Component {
         <div className={'about-weatherbox--wrapper'}>
           <div className={'about-weatherbox--center'}>
             <div className={'about-weatherbox--primary'}>City. Weather. Music</div>
-            <div className={'about-weatherbox--secondary'}>Discover songs that suit the weather</div>
           </div>
         </div>
       );
