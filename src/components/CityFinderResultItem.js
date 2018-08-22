@@ -12,6 +12,7 @@ class CityFinderResultItem extends Component {
   render() {
     return (
       <div key={this.props.id}
+           tabIndex={0}
            className={'searched-city--item'}
            onClick={() => {this.props.citySelectHandler(this.props.listing.gid)}}>
         <div className={'searched-city-item--city'}>{this.props.listing.cityName}<span className={'searched-city-item--altcity'}>{this.altCityNamePrint()}</span></div>

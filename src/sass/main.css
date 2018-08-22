@@ -19,23 +19,38 @@ body {
 
 .city-finder-page--spacing-force-wrapper {
   height: 100%;
-  width: 100%;
+  width: 100%; }
+
+.city-results--shown-lock {
   max-height: 100vh;
   overflow: hidden; }
 
-.city-results--shown-unlock {
-  overflow-y: auto; }
-
 .city-finder-page--wrapper {
   width: 100%;
+  display: -ms-flexbox;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   max-width: 800px;
   margin: 0 auto;
-  transition: 0.4s ease;
-  padding: 30vh 5% 50px 5%; }
+  min-height: 100vh;
+  transition: padding 0.4s ease;
+  padding: 30vh 5% 50px 5%;
+  position: relative; }
+
+.city-finder--page-title {
+  position: absolute;
+  top: 5vh;
+  left: 5%;
+  text-align: right;
+  width: 90%;
+  font-size: 2em;
+  opacity: 0.2;
+  text-transform: uppercase;
+  transition: 0.4s ease; }
+  .city-results--shown .city-finder--page-title {
+    transform: translateY(-30vh); }
 
 .city-results--shown {
   padding-top: 5vh; }
@@ -46,6 +61,8 @@ body {
 .city-finder--no-results {
   font-size: 1.5rem;
   margin-top: 20vh;
+  width: 100%;
+  text-align: center;
   color: rgba(255, 255, 255, 0.5); }
 
 .city-finder--title {
@@ -54,8 +71,18 @@ body {
   margin: 0.25rem 0; }
 
 .city-finder--title-connect {
-  color: #1fab50;
-  text-decoration: none; }
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  padding: 5px 10px;
+  transition: 0.1s ease-in-out; }
+  .city-finder--title-connect .city-finder--title-spotify {
+    transition: 0.1s ease-in-out; }
+  .city-finder--title-connect:hover, .city-finder--title-connect:focus {
+    border: none;
+    padding-left: 0; }
+    .city-finder--title-connect:hover .city-finder--title-spotify, .city-finder--title-connect:focus .city-finder--title-spotify {
+      color: #1bbc54; }
 
 .searched-city--form {
   display: flex;
@@ -68,7 +95,7 @@ body {
     border: 0;
     border-bottom: 2px solid #d17c78;
     font-size: 2.5rem;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Playfair Display', sans-serif;
     height: 5rem;
     outline: 0;
     width: 100%; }
@@ -85,7 +112,7 @@ body {
     background: transparent;
     outline: 0;
     cursor: pointer; }
-    .searched-city--form input[type=submit]:hover {
+    .searched-city--form input[type=submit]:hover, .searched-city--form input[type=submit]:focus {
       color: white; }
 
 .searched-cities--wrapper {
@@ -100,7 +127,7 @@ body {
   transition: 0.2s ease; }
   .searched-city--item:not(:first-child) {
     border-top: 2px solid rgba(255, 255, 255, 0.3); }
-  .searched-city--item:hover {
+  .searched-city--item:hover, .searched-city--item:focus {
     padding-left: 1.25rem; }
 
 .searched-city-item--country {
@@ -173,7 +200,8 @@ body {
   text-decoration: none;
   margin-right: 1rem;
   padding: 0 1rem;
-  position: relative; }
+  position: relative;
+  font-family: 'Quicksand', sans-serif; }
   .city-view--home-link:after {
     content: '';
     position: absolute;
@@ -184,7 +212,7 @@ body {
     left: 0;
     transform: translateX(0) scaleX(0);
     transition: 0.1s ease; }
-  .city-view--home-link:hover:after {
+  .city-view--home-link:hover:after, .city-view--home-link:focus:after {
     transform: translateX(0) scaleX(1); }
 
 .song-listing--refresh-music {
@@ -199,8 +227,8 @@ body {
     cursor: pointer;
     border: 1px solid #d17c78;
     font-family: 'Quicksand', sans-serif;
-    font-size: 1.25rem; }
-    .song-listing--refresh-music > button:hover {
+    font-size: 1em; }
+    .song-listing--refresh-music > button:hover, .song-listing--refresh-music > button:focus {
       background: #d17c78;
       color: #1a1e3d; }
 
@@ -227,7 +255,7 @@ body {
     .song-listing--item > .song-listing--item-album-img > img {
       max-height: 150px;
       max-width: 150px; }
-  .song-listing--item:hover > .song-listing--item-album-img {
+  .song-listing--item:hover > .song-listing--item-album-img, .song-listing--item:focus > .song-listing--item-album-img {
     transform: translateX(15%); }
 
 .song-listing--info-wrapper {
@@ -260,14 +288,14 @@ body {
     font-weight: 200;
     font-size: 2rem;
     transition: 0.3s ease; }
-  .song-listing--save-song:hover:after {
+  .song-listing--save-song:hover:after, .song-listing--save-song:focus:after {
     color: #d0d0d0; }
 
 .song-listing--song-in-library:after {
   font-size: 24px;
   content: '\2713';
   font-family: serif; }
-.song-listing--song-in-library:hover:after {
+.song-listing--song-in-library:hover:after, .song-listing--song-in-library:focus:after {
   color: #d17c78; }
 
 @media only screen and (min-width: 700px) {
@@ -297,7 +325,9 @@ body {
     flex: 100%; }
     .song-listing--item > img {
       max-width: 70px;
-      max-height: 70px; } }
+      max-height: 70px; }
+    .song-listing--item:hover > .song-listing--item-album-img, .song-listing--item:focus > .song-listing--item-album-img {
+      transform: translateX(-5%); } }
 .loading-wrapper {
   width: 100%;
   display: flex;
@@ -333,5 +363,31 @@ body {
     transform: rotate(0deg); }
   100% {
     transform: rotate(90deg); } }
+.about-weatherbox--wrapper {
+  flex: 1;
+  width: 100%;
+  padding: 1rem 0; }
+  .about-weatherbox--wrapper .about-weatherbox--center {
+    color: rgba(255, 255, 255, 0.8); }
+  .about-weatherbox--wrapper .about-weatherbox--primary {
+    font-size: 1.25rem; }
+
+.credit-to-me {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 10px 10px 0;
+  font-size: 1rem;
+  color: rgba(255, 255, 255, 0.3);
+  overflow: hidden;
+  white-space: nowrap;
+  transition: none; }
+  .credit-to-me--name {
+    color: rgba(255, 255, 255, 0.5); }
+    .credit-to-me--name:hover, .credit-to-me--name:focus {
+      color: white; }
+  .credit-to-me--heart {
+    color: #a00000; }
 
 /*# sourceMappingURL=main.css.map */

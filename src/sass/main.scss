@@ -22,22 +22,39 @@ body {
 .city-finder-page--spacing-force-wrapper {
   height: 100%;
   width: 100%;
+}
+.city-results--shown-lock {
   max-height: 100vh;
   overflow: hidden;
 }
-.city-results--shown-unlock {
-  overflow-y: auto;
-}
 .city-finder-page--wrapper {
   width: 100%;
+  display: -ms-flexbox;
   display: flex;
   flex-flow: column nowrap;
-  justify-content: center;
-  align-items: center;
+  justify-content: flex-start;
+  align-items: flex-start;
   max-width: 800px;
   margin: 0 auto;
-  transition: 0.4s ease;
+  min-height: 100vh;
+  transition: padding 0.4s ease;
   padding: 30vh 5% 50px 5%;
+  position: relative;
+}
+.city-finder--page-title {
+  position: absolute;
+  top: 5vh;
+  left: 5%;
+  text-align: right;
+  width: 90%;
+  font-size: 2em;
+  opacity: 0.2;
+  text-transform: uppercase;
+  transition: 0.4s ease;
+
+  .city-results--shown & {
+    transform: translateY(-30vh);
+  }
 }
 .city-results--shown {
   padding-top: 5vh;
@@ -48,6 +65,8 @@ body {
 .city-finder--no-results {
   font-size: 1.5rem;
   margin-top: 20vh;
+  width: 100%;
+  text-align: center;
   color: rgba(255,255,255,0.5);
 }
 .city-finder--title {
@@ -57,8 +76,24 @@ body {
 }
 
 .city-finder--title-connect {
-  color: #1fab50;
   text-decoration: none;
+  color: rgba(255,255,255,0.8);
+  border: 1px solid rgba(255,255,255,0.8);
+  padding: 5px 10px;
+  transition: 0.1s ease-in-out;
+
+  & .city-finder--title-spotify {
+    transition: 0.1s ease-in-out;
+  }
+
+  &:hover, &:focus {
+    border: none;
+    padding-left: 0;
+
+    & .city-finder--title-spotify {
+      color: #1bbc54;
+    }
+  }
 }
 .searched-city--form {
   display: flex;
@@ -72,7 +107,7 @@ body {
     border: 0;
     border-bottom: 2px solid #d17c78;
     font-size: 2.5rem;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Playfair Display', sans-serif;
     height: 5rem;
     outline: 0;
     width: 100%;
@@ -92,7 +127,7 @@ body {
     background: transparent;
     outline: 0;
     cursor: pointer;
-    &:hover {
+    &:hover, &:focus {
       color: white;
     }
   }
@@ -112,7 +147,7 @@ body {
     border-top: 2px solid rgba(255,255,255,0.3);
   }
 
-  &:hover {
+  &:hover, &:focus {
     padding-left: 1.25rem;
   }
 }
@@ -191,6 +226,7 @@ body {
   margin-right: 1rem;
   padding: 0 1rem;
   position: relative;
+  font-family: 'Quicksand', sans-serif;
 
   &:after {
     content: '';
@@ -204,7 +240,7 @@ body {
     transition: 0.1s ease;
   }
 
-  &:hover:after {
+  &:hover:after, &:focus:after {
     transform: translateX(0) scaleX(1);
   }
 }
@@ -222,9 +258,9 @@ body {
     cursor: pointer;
     border: 1px solid #d17c78;
     font-family: 'Quicksand', sans-serif;
-    font-size: 1.25rem;
+    font-size: 1em;
 
-    &:hover {
+    &:hover, &:focus {
       background: #d17c78;
       color: #1a1e3d;
     }
@@ -261,7 +297,7 @@ body {
     }
   }
 
-  &:hover {
+  &:hover, &:focus {
     & > .song-listing--item-album-img {
       transform: translateX(15%);
     }
@@ -300,7 +336,7 @@ body {
     transition: 0.3s ease;
   }
 
-  &:hover:after {
+  &:hover:after, &:focus:after {
     color: #d0d0d0;
   }
 }
@@ -311,7 +347,7 @@ body {
     content: '\2713';
     font-family: serif;
   }
-  &:hover:after {
+  &:hover:after, &:focus:after {
     color: #d17c78;
   }
 }
@@ -355,6 +391,12 @@ body {
     > img {
       max-width: 70px;
       max-height: 70px;
+    }
+
+    &:hover, &:focus {
+      & > .song-listing--item-album-img {
+        transform: translateX(-5%);
+      }
     }
   }
 }
@@ -403,4 +445,41 @@ $hollowTiming: 1.25s;
 @keyframes loaderAnim {
   0% {transform: rotate(0deg);}
   100% {transform: rotate(90deg);}
+}
+
+.about-weatherbox--wrapper {
+  flex: 1;
+  width: 100%;
+  padding: 1rem 0;
+
+  & .about-weatherbox--center {
+    color: rgba(255,255,255,0.8);
+  }
+  & .about-weatherbox--primary {
+    font-size: 1.25rem;
+  }
+}
+
+.credit-to-me {
+  position: absolute;
+  bottom: 5px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 10px 10px 10px 0;
+  font-size: 1rem;
+  color: rgba(255,255,255,0.3);
+  overflow: hidden;
+  white-space: nowrap;
+  transition: none;
+
+  &--name {
+    color: rgba(255,255,255,0.5);
+
+    &:hover, &:focus {
+      color: white;
+    }
+  }
+  &--heart {
+    color: #a00000;
+  }
 }

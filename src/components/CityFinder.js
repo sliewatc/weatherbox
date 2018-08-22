@@ -27,8 +27,9 @@ class CityFinder extends Component {
       gid: null,
       redirect: false,
       searchShownClass: '',
-      searchUnlockScroll: '',
+      searchLockScroll: '',
       emptySearch: false,
+      searchActive: false
     };
 
     // Handle token expiry
@@ -45,8 +46,12 @@ class CityFinder extends Component {
   }
 
   unlockPageHeight = () => {
+    this.setState({
+      searchLockScroll: 'city-results--shown-lock',
+      searchActive: true
+    });
     setTimeout(() => {
-      this.setState({ searchUnlockScroll: 'city-results--shown-unlock' }, () => {
+      this.setState({ searchLockScroll: '' }, () => {
         if (this.state.searchResult.length === 0) {
           this.setState({
             emptySearch: true,
@@ -73,6 +78,7 @@ class CityFinder extends Component {
         this.setState({
           searchResult: stateOfResults,
           emptySearch: false,
+          searchActive: true,
           searchShownClass: 'city-results--shown'
         }, this.unlockPageHeight());
       });
@@ -80,6 +86,8 @@ class CityFinder extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
+    if (!this.state.value) return;
+
     const resultLimit = 5;
     const query = encodeURIComponent(this.state.value);
     const reqUrl = `https://api.teleport.org/api/cities/?search=${query}&limit=${resultLimit}`;
@@ -101,8 +109,9 @@ class CityFinder extends Component {
           lastQuery: null,
           gid: null,
           searchShownClass: '',
-          searchUnlockScroll: '',
+          searchLockScroll: '',
           emptySearch: false,
+          searchActive: false,
         })
       }
     })
@@ -125,8 +134,21 @@ class CityFinder extends Component {
       )
     } else {
       return (
-        <p className={'city-finder--title'}><a className={'city-finder--title-connect'} href={'http://localhost:5000/api/spotify/login'}>Connect</a> to find a city's tune</p>
+        <p className={'city-finder--title'}><a className={'city-finder--title-connect'} href={'http://localhost:5000/api/spotify/login'}>Connect to <span className={'city-finder--title-spotify'}>Spotify</span></a></p>
       )
+    }
+  };
+
+  renderAboutWeatherBox = () => {
+    if ((!this.state.searchActive)) {
+      return (
+        <div className={'about-weatherbox--wrapper'}>
+          <div className={'about-weatherbox--center'}>
+            <div className={'about-weatherbox--primary'}>City. Weather. Music</div>
+            <div className={'about-weatherbox--secondary'}>Discover songs that suit the weather</div>
+          </div>
+        </div>
+      );
     }
   };
 
@@ -138,10 +160,11 @@ class CityFinder extends Component {
 
   render() {
     return (
-      <div className={`city-finder-page--spacing-force-wrapper ${this.state.searchUnlockScroll}`}>
+      <div className={`city-finder-page--spacing-force-wrapper ${this.state.searchLockScroll}`}>
         <div className={`city-finder-page--wrapper ${this.state.searchShownClass}`}>
+          <div className={'city-finder--page-title'}>Weatherbox</div>
+          {this.renderFinderTitle()}
           <div className={'city-finder-form--wrapper'}>
-            {this.renderFinderTitle()}
             <form onSubmit={this.handleSubmit} className={'searched-city--form'}>
               <input type='text'
                      value={this.state.value}
@@ -153,6 +176,10 @@ class CityFinder extends Component {
           {this.state.emptySearch ? <div className={'city-finder--no-results'}>There's nothing here!</div> : ''}
           <CityFinderResultList searchResult={this.state.searchResult}
                                 citySelectHandler={this.citySelectHandler}/>
+          {this.renderAboutWeatherBox()}
+          <div className="credit-to-me">
+            Made with	<span className="credit-to-me--heart">&#10084;</span> by <a href={'http://seanliew.me'} className="credit-to-me--name">Sean Liew</a>
+          </div>
         </div>
       </div>
     )
