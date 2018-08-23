@@ -66,7 +66,7 @@ const sendRecommendationsRequest = (accessToken, features, genres) => {
   return axios({
     url: 'https://api.spotify.com/v1/recommendations',
     method: 'GET',
-    params: Object.assign(features, {seed_genres : genres, limit: 12, min_popularity: 25}),
+    params: Object.assign(features, {seed_genres : genres, limit: 12, min_popularity: 15}),
     headers: {
       'Authorization': `Bearer ${accessToken}`
     },
