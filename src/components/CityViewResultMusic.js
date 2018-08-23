@@ -104,7 +104,7 @@ class CityViewMusic extends Component {
       })
   };
 
-  handleSongClick = (uri) => {
+  handleSongClick = (uri, href) => {
     axios({
       headers: {
         'Accept': 'application/json',
@@ -158,6 +158,7 @@ class CityViewMusic extends Component {
       })
       .catch(err => {
         console.log(err);
+        window.open(href, '_blank');
       });
   };
 
@@ -167,6 +168,7 @@ class CityViewMusic extends Component {
         <React.Fragment>
           <div className={'recommended-songs--wrapper'}>
             {this.state.tracks.map((result, index) => {
+              console.log(result);
               this.trackUris.push(result.uri);
               return (<CityViewResultMusicItem
                 key={index}

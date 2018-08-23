@@ -77,7 +77,7 @@ class CityViewResultMusicItem extends Component {
 
   render() {
     return (
-      <a className={'song-listing--item'} onClick={() => {this.props.handleSongClick(this.props.trackData.uri)}}>
+      <a className={'song-listing--item'} onClick={() => {this.props.handleSongClick(this.props.trackData.uri, this.props.trackData.external_urls.spotify)}}>
         <div className={'song-listing--item-album-img'}>
           <img src={this.props.trackData.album.images[1].url} alt={this.props.trackData.album.name}/>
         </div>
