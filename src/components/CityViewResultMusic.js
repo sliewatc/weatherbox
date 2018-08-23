@@ -168,7 +168,6 @@ class CityViewMusic extends Component {
         <React.Fragment>
           <div className={'recommended-songs--wrapper'}>
             {this.state.tracks.map((result, index) => {
-              console.log(result);
               this.trackUris.push(result.uri);
               return (<CityViewResultMusicItem
                 key={index}
