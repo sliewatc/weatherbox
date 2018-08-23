@@ -14,7 +14,7 @@ body {
     position: fixed;
     content: "";
     top: 0;
-    bottom: 0;
+    height: 100vh;
     left: 0;
     right: 0;
     background: url("../images/bg.jpg") no-repeat center center fixed;
