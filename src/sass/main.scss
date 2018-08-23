@@ -74,6 +74,11 @@ body {
 }
 .city-finder-form--wrapper {
   width: 100%;
+  & input {
+    border-radius: 0;
+    -webkit-appearance: none;
+    -webkit-border-radius: 0;
+  }
 }
 .city-finder--no-results {
   font-size: 1.5rem;
