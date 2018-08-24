@@ -21,7 +21,7 @@ const setImplicitAccessToken = async () => {
 class SetImplicitToken extends Component {
   componentDidMount() {
     setImplicitAccessToken()
-      .then((token) => {
+      .then(() => {
         window.location.replace('/');
       })
       .catch(err => {

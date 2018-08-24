@@ -49,8 +49,8 @@ const FeatureWeather = (temp, cond, condDescription, wind) => {
       console.log('set SNOW');
       break;
     case ('Rain') :
-      featureObject.max_valence = 0.4;
-      featureObject.max_energy = 0.4;
+      featureObject.max_valence = 0.55;
+      featureObject.max_energy = 0.55;
       console.log('set RAIN');
       break;
     case ('Drizzle') :

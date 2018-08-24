@@ -18,6 +18,7 @@ class CityView extends Component {
       cityWind: null,
     }
   }
+
   componentDidMount() {
     let reqUrl = `https://api.openweathermap.org/data/2.5/weather?id=${this.state.gid}&APPID=${openWeatherMapAPPID}`;
     fetch(reqUrl)
