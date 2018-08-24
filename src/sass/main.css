@@ -92,8 +92,8 @@ body {
 
 .city-finder--title-connect {
   text-decoration: none;
-  color: rgba(255, 255, 255, 0.8);
-  border: 1px solid rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.4);
   padding: 5px 10px;
   transition: 0.1s ease-in-out; }
   .city-finder--title-connect .city-finder--title-spotify {
