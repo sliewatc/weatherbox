@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import CityViewMusic from './CityViewResultMusic'
 import {Link} from 'react-router-dom'
 
+import weatherIconResolver from './../actions/WeatherIconResolver';
+
 class CityViewResult extends Component {
   constructor() {
     super();
@@ -18,17 +20,7 @@ class CityViewResult extends Component {
 
   renderWeatherIcon = () => {
     const wid = this.props.weather.cityCondID;
-    let iconClass = '';
-
-    if (wid === 800) iconClass = 'wi-day-sunny';
-    if (wid === 801 || wid === 802) iconClass = 'wi-day-cloudy';
-    if (wid === 803 || wid === 804) iconClass = 'wi-cloudy';
-    if (wid >= 200 && wid <= 232) iconClass = 'wi-storm-showers';
-    if (wid >= 300 && wid <= 321) iconClass = 'wi-showers';
-    if (wid >= 500 && wid <= 504) iconClass = 'wi-day-rain';
-    if (wid >= 511 && wid <= 531) iconClass = 'wi-rain';
-    if (wid >= 600 && wid <= 622) iconClass = 'wi-snow';
-    if (wid >= 700 && wid <= 781) iconClass = 'wi-dust';
+    const { result: iconClass } = weatherIconResolver.find(c => c.condition(wid));
 
     return(<i className={`wi ${iconClass} city-view--weather-icon`}></i>)
   };
