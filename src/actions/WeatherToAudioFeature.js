@@ -1,5 +1,4 @@
 const FeatureWeather = (temp, cond, condDescription, wind) => {
-  temp = Number(temp);
   wind = Number(wind);
 
   let featureObject = {};
@@ -69,7 +68,7 @@ const FeatureWeather = (temp, cond, condDescription, wind) => {
       console.log('set DEFAULT CONDITION');
   }
 
-  // Switch on wind affecting energy
+  //  Wind to energy
   switch (true) {
     case (wind < 0.3) :
       featureObject.max_energy += 0;

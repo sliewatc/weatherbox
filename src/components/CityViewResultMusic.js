@@ -15,7 +15,7 @@ class CityViewMusic extends Component {
   }
 
   getSpotifySongs = async () => {
-    const songs = fetch('/api/songs', {
+    return fetch('/api/songs', {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
@@ -32,7 +32,6 @@ class CityViewMusic extends Component {
       .catch(err => {
         console.log(err)
       });
-    return songs;
   };
 
   refreshMusic = () => {
@@ -99,11 +98,12 @@ class CityViewMusic extends Component {
           this.setState({
             songsSet: true,
           })
-        })
+        });
         console.log(err);
       })
   };
 
+  // Attempt to play song on a Spotify device when clicked
   handleSongClick = (uri, href) => {
     axios({
       headers: {
@@ -113,6 +113,7 @@ class CityViewMusic extends Component {
       },
       url: 'https://api.spotify.com/v1/me/player/devices'
     })
+      // Attempt to find recent active / available device from returned array of registered devices
       .then(resp => {
         let index = 0;
         while(resp.data.devices[index]) {
@@ -126,6 +127,8 @@ class CityViewMusic extends Component {
         }
         throw Error('Cannot find an available device to play on.')
       })
+
+      // Play song on first available device, else open browser player
       .then((device) => {
         axios({
           headers: {

@@ -23,7 +23,9 @@ class CityFinderResultItem extends Component {
          className={'searched-city--item'}
          onKeyPress={(e) => this.handleEnterPressed(e)}
          onClick={() => {this.props.citySelectHandler(this.props.listing.gid)}}>
-        <div className={'searched-city-item--city'}>{this.props.listing.cityName}<span className={'searched-city-item--altcity'}>{this.altCityNamePrint()}</span></div>
+        <div className={'searched-city-item--city'}>{this.props.listing.cityName}
+          <span className={'searched-city-item--altcity'}>{this.altCityNamePrint()}</span>
+        </div>
         <div className={'searched-city-item--region'}>{this.props.listing.regionName},</div>
         <div className={'searched-city-item--country'}>{this.props.listing.countryName}</div>
       </a>

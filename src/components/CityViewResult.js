@@ -21,7 +21,6 @@ class CityViewResult extends Component {
   renderWeatherIcon = () => {
     const wid = this.props.weather.cityCondID;
     const { result: iconClass } = weatherIconResolver.find(c => c.condition(wid));
-
     return(<i className={`wi ${iconClass} city-view--weather-icon`}></i>)
   };
 

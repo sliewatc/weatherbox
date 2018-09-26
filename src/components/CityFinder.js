@@ -41,9 +41,6 @@ class CityFinder extends Component {
     }
   }
 
-  componentDidMount() {
-  }
-
   unlockPageHeight = () => {
     this.setState({
       searchLockScroll: 'city-results--shown-lock',
@@ -133,7 +130,11 @@ class CityFinder extends Component {
       )
     } else {
       return (
-        <p className={'city-finder--title'}><a className={'city-finder--title-connect'} href={'http://localhost:5000/api/spotify/login'}>Connect to <span className={'city-finder--title-spotify'}>Spotify</span></a></p>
+        <p className={'city-finder--title'}>
+          <a className={'city-finder--title-connect'} href={'http://localhost:5000/api/spotify/login'}>
+            Connect to <span className={'city-finder--title-spotify'}>Spotify</span>
+          </a>
+        </p>
       )
     }
   };

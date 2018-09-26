@@ -69,15 +69,22 @@ class CityViewResultMusicItem extends Component {
       return;
     }
     if (this.state.songInLibrary) {
-      return (<button className={'song-listing--save-song song-listing--song-in-library'} onClick={(event) => {this.handleRemoveSong(event, this.props.trackData.id)}}></button>);
+      return (
+        <button className={'song-listing--save-song song-listing--song-in-library'}
+                onClick={(event) => {this.handleRemoveSong(event, this.props.trackData.id)}}>
+        </button>);
     } else  {
-      return (<button className={'song-listing--save-song'} onClick={(event) => {this.handleSaveSong(event, this.props.trackData.id)}}></button>);
+      return (
+        <button className={'song-listing--save-song'}
+                onClick={(event) => {this.handleSaveSong(event, this.props.trackData.id)}}>
+        </button>);
     }
   };
 
   render() {
     return (
-      <a className={'song-listing--item'} onClick={() => {this.props.handleSongClick(this.props.trackData.uri, this.props.trackData.external_urls.spotify)}}>
+      <a className={'song-listing--item'}
+         onClick={() => {this.props.handleSongClick(this.props.trackData.uri, this.props.trackData.external_urls.spotify)}}>
         <div className={'song-listing--item-album-img'}>
           <img src={this.props.trackData.album.images[1].url} alt={this.props.trackData.album.name}/>
         </div>
