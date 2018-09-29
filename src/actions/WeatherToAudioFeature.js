@@ -1,6 +1,9 @@
 const FeatureWeather = (temp, cond, condDescription, wind) => {
+  // Casting conditions to avoid potential bugs
   wind = Number(wind);
+  temp = Number(temp);
 
+  // Object to be returned to make API call with features set
   let featureObject = {};
 
   // Switch on condition affecting overall music features
@@ -68,7 +71,7 @@ const FeatureWeather = (temp, cond, condDescription, wind) => {
       console.log('set DEFAULT CONDITION');
   }
 
-  //  Wind to energy
+  //  Add energy depending on wind speed
   switch (true) {
     case (wind < 0.3) :
       featureObject.max_energy += 0;
@@ -105,6 +108,7 @@ const FeatureWeather = (temp, cond, condDescription, wind) => {
   return featureObject;
 };
 
+// List of spotify preset genres to seed the recommendations request
 const spotifyGenres = [
   "acoustic",
   "alternative",

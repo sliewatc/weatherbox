@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter as Router, Route, withRouter } from 'react-router-dom'
 import CityFinder from './components/CityFinder'
 import CityView from './components/CityView'
-import SetImplicitToken from './components/SetImplicitToken'
+import SetImplicitToken from './actions/SetImplicitToken'
 
 const SetImplicitTokenRouted = withRouter(SetImplicitToken);
 const CityViewRouted = withRouter(CityView);
