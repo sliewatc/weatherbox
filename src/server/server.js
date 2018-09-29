@@ -20,24 +20,25 @@ app.use(bodyParser.json());
 
 const setSpotifyAccessToken = () => {
   let tokenPromise = null;
+
   if (!spotifyAccessTokenSet) {
     tokenPromise = getSpotifyAccessToken()
       .then(resp => {
-        return resp.access_token;
-      })
-      .then(token => {
         spotifyAccessTokenSet = true;
-        return token;
+        return resp.access_token;
       })
       .catch(err => {
         spotifyAccessTokenSet = false;
         console.log(err);
       });
 
-    spotifyAccessToken = tokenPromise.then(accessToken => {
-      return accessToken
-    });
+    spotifyAccessToken = tokenPromise
+      .then(accessToken => {
+        return accessToken
+      });
   }
+
+  // Optional return value for calls requiring a token back
   return spotifyAccessToken;
 };
 
@@ -62,31 +63,25 @@ const getSpotifyAccessToken = () => {
     });
 };
 
-const sendRecommendationsRequest = (accessToken, features, genres) => {
-  return axios({
-    url: 'https://api.spotify.com/v1/recommendations',
-    method: 'GET',
-    params: Object.assign(features, {seed_genres : genres, limit: 12, min_popularity: 15}),
-    headers: {
-      'Authorization': `Bearer ${accessToken}`
-    },
-  })
-    .then((respond) => {
-      return respond.data;
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
-
 const getRecommendations = (weather, token) => {
   let features = FeatureWeather(weather.cityTemp, weather.cityCond, weather.cityCondDescription, weather.cityWind);
   const shuffled = spotifyGenres.sort(() => .5 - Math.random());
   let genres = shuffled.slice(0,2).join(',') ;
 
-  return sendRecommendationsRequest(token, features, genres)
+  return axios({
+    url: 'https://api.spotify.com/v1/recommendations',
+    method: 'GET',
+    // Merge features object with query options
+    params: Object.assign(features, {seed_genres : genres, limit: 12, min_popularity: 15}),
+    headers: {
+      'Authorization': `Bearer ${token}`
+    },
+  })
     .then((resp) => {
-      return resp.tracks;
+      return resp.data.tracks;
+    })
+    .catch((err) => {
+      console.log(err)
     });
 };
 
@@ -107,7 +102,6 @@ const tokenRefresher = () => {
     tokenRefresher()
   }, 3500000);
 };
-
 // Refresh token every 1 hour
 tokenRefresher();
 
@@ -125,7 +119,6 @@ app.post('/api/songs', (req, res) => {
 });
 
 app.get('/api/spotify/login', (req, res) => {
-  console.log('listening');
   spotifyLoginImplicitGrant()
     .then(spotifyAuthorizeUrl => {
       res.redirect(spotifyAuthorizeUrl);

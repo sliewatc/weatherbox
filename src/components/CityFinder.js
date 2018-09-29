@@ -122,6 +122,13 @@ class CityFinder extends Component {
     });
   };
 
+  // Redirect to song suggestions page for the selected city
+  renderRedirect =  () => {
+    if (this.state.redirect) {
+      this.props.history.push(`/city/${this.state.gid}`);
+    }
+  };
+
   renderFinderTitle = () => {
     let accessToken = localStorage.getItem('access_token');
     if (accessToken !== 'undefined' && accessToken !== undefined && accessToken !== null && typeof accessToken !== 'undefined') {
@@ -140,7 +147,7 @@ class CityFinder extends Component {
   };
 
   renderAboutWeatherBox = () => {
-    if ((!this.state.searchActive)) {
+    if (!this.state.searchActive) {
       return (
         <div className={'about-weatherbox--wrapper'}>
           <div className={'about-weatherbox--center'}>
@@ -148,12 +155,6 @@ class CityFinder extends Component {
           </div>
         </div>
       );
-    }
-  };
-
-  renderRedirect =  () => {
-    if (this.state.redirect) {
-      this.props.history.push(`/city/${this.state.gid}`);
     }
   };
 

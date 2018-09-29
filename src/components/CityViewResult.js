@@ -5,28 +5,19 @@ import {Link} from 'react-router-dom'
 import weatherIconResolver from './../actions/WeatherIconResolver';
 
 class CityViewResult extends Component {
-  constructor() {
-    super();
-    this.state = {
-      showMusic: true
-    }
-  }
-
-  componentDidMount() {
-    this.setState({
-      weatherIcon : this.renderWeatherIcon(),
-    })
-  }
-
   renderWeatherIcon = () => {
     const wid = this.props.weather.cityCondID;
     const { result: iconClass } = weatherIconResolver.find(c => c.condition(wid));
-    return(<i className={`wi ${iconClass} city-view--weather-icon`}></i>)
+    return(
+      <i className={`wi ${iconClass} city-view--weather-icon`}/>
+    )
   };
 
   renderMusic = () => {
-    if (this.props.weather.dataIsSet && this.state.showMusic) {
-      return (<CityViewMusic weather={this.props.weather}/>)
+    if (this.props.weather.dataIsSet) {
+      return (
+        <CityViewMusic weather={this.props.weather}/>
+      )
     }
   };
 
@@ -41,7 +32,7 @@ class CityViewResult extends Component {
           <div className={'city-view--condition-left'}>
             <span className={'city-view--wind'}>{this.props.weather.cityWind} m/s</span>
             <span className={'city-view--desc'}>
-              {this.state.weatherIcon}{this.props.weather.cityCondDescription}
+              {this.renderWeatherIcon()}{this.props.weather.cityCondDescription}
             </span>
           </div>
           <div className={'city-view--condition-right'}>

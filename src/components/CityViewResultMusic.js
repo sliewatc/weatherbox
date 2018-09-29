@@ -23,11 +23,8 @@ class CityViewMusic extends Component {
       method: 'POST',
       body: JSON.stringify({ weather: this.props.weather })
     })
-      .then(data => {
-        return data;
-      })
-      .then(resp => {
-        return resp.json();
+      .then(raw => {
+        return raw.json();
       })
       .catch(err => {
         console.log(err)
