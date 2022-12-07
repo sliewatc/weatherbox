@@ -5,8 +5,8 @@
   "proxy": "http://localhost:5000/",
   "dependencies": {
     "assign": "^0.1.7",
-    "body-parser": "^1.18.3",
-    "express": "^4.16.3",
+    "body-parser": "^1.20.1",
+    "express": "^4.18.2",
     "minipass": "^2.3.3",
     "mkdirp": "^0.5.1",
     "mysql": "^2.16.0",
